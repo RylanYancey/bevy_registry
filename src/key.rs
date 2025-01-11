@@ -30,6 +30,14 @@ impl<I: Any> Clone for LocalKey<I> {
     }
 }
 
+impl<I: Any> PartialEq for LocalKey<I> {
+    fn eq(&self, other: &Self) -> bool {
+        self.index == other.index
+    }
+}
+
+impl<I: Any> Eq for LocalKey<I> {}
+
 /// A GlobalKey is a hash of an entry identifier.
 /// It is guaranteed to be the same across versions,
 /// platforms, or runtimes. Thus, it is suitable for
@@ -146,3 +154,11 @@ impl<I: Any> Hash for GlobalKey<I> {
         state.write_u64(self.hash)
     }
 }
+
+impl<I: Any> PartialEq for GlobalKey<I> {
+    fn eq(&self, other: &Self) -> bool {
+        self.hash == other.hash
+    }
+}
+
+impl<I: Any> Eq for GlobalKey<I> {}
